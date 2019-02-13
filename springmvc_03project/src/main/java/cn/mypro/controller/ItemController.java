@@ -5,8 +5,11 @@ import cn.mypro.model.Item;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,5 +54,25 @@ public class ItemController {
     public String editItem(EditVo vo){
         System.out.println(vo);
         return "edit";
+    }
+
+    /**
+     * 案例4：上传
+     */
+    @RequestMapping("updateItem")
+    public String upload(MultipartFile pictureFile){
+        if(pictureFile!=null){
+            // 获取名称
+            String originalFilename = pictureFile.getOriginalFilename();
+            String extendName = originalFilename.substring(originalFilename.lastIndexOf("."));
+            // 传送
+            String newFilename = System.currentTimeMillis()+extendName;
+            try {
+                pictureFile.transferTo(new File("D:\\"+newFilename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "success";
     }
 }

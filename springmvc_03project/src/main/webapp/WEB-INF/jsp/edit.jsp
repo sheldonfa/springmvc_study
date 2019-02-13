@@ -11,8 +11,8 @@
 <body>
 <!-- 上传图片是需要指定属性 enctype="multipart/form-data" -->
 <form id="itemForm"
-      action="${pageContext.request.contextPath }/updateItem.do"
-      method="post">
+      action="${pageContext.request.contextPath }/updateItem"
+      method="post" enctype="multipart/form-data">
     修改商品信息：
     <input type="hidden" name="id" value="1"/>
     <table width="100%" border=1>
@@ -29,16 +29,16 @@
             <td>商品生产日期</td>
             <td><input type="text" name="createtime" value="2018-07-15 17:22:30"/></td>
         </tr>
-        <%--<tr>--%>
-            <%--<td>商品图片</td>--%>
-            <%--<td>--%>
-                <%--<c:if test="${item.pic !=null}">--%>
-                    <%--<img src="http://127.0.0.1:8081/pic/${item.pic}" width=100 height=100/>--%>
-                    <%--<br/>--%>
-                <%--</c:if>--%>
-                <%--<input type="file" name="pictureFile"/>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
+        <tr>
+            <td>商品图片</td>
+            <td>
+                <c:if test="${item.pic !=null}">
+                    <img src="http://127.0.0.1:8081/pic/${item.pic}" width=100 height=100/>
+                    <br/>
+                </c:if>
+                <input type="file" name="pictureFile"/>
+            </td>
+        </tr>
         <tr>
             <td>商品简介</td>
             <td><textarea rows="3" cols="30" name="detail">国产的质量越来越好了，放心使用</textarea>
